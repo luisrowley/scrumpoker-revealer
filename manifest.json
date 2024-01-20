@@ -12,7 +12,7 @@
         "48": "images/icon48.png",
         "128": "images/icon128.png"
       },
-      "default_title": "Añadir Clase"
+      "default_title": "Reveal scrumpoker cards"
     },
     "action": {
         "default_popup": "menu.html",
