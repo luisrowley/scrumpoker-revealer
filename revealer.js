@@ -1,16 +1,35 @@
-console.log('Extension loaded');
+function addClassToFlipCards() {
+    const flipCards = document.querySelectorAll('.flip-card');
 
-function run() {
-    var intervalID = setInterval(function() {
-        const flipCards = document.querySelectorAll('.flip-card');
-        if (flipCards.length > 0) {
-            console.log('flipCards loaded '+ flipCards);
-            flipCards.forEach(function (flipCard) {
-                flipCard.classList.add('flip-card-transform');
-            });
-            clearInterval(intervalID);
-        }
+    if (flipCards.length > 0) {
+      flipCards.forEach(function (flipCard) {
+        flipCard.className += ' flip-card-transform';
+      });
+    } else {
+      console.log('No flip cards found.');
+    }
+  }
+  
+  // Wait for the Angular application to be fully loaded
+function waitForAngular() {
+    const intervalId = setInterval(function () {
+      if (document.readyState === 'complete' && typeof angular !== 'undefined') {
+        clearInterval(intervalId);
+        addClassToFlipCards();
+      }
     }, 1000);
 }
-
-document.addEventListener("DOMContentLoaded", run);
+  
+  // Execute the code when the page has finished loading
+document.addEventListener('DOMContentLoaded', function () {
+    // If Angular is already loaded, add the class immediately
+    if (typeof angular !== 'undefined') {
+      addClassToFlipCards();
+    } else {
+      // Otherwise, wait for Angular to load
+      waitForAngular();
+    }
+  
+    const observer = new MutationObserver(addClassToFlipCards);
+    observer.observe(document.body, { subtree: true, childList: true });
+});
