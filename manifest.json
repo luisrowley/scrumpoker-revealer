@@ -21,7 +21,8 @@
     "content_scripts": [
       {
         "matches": ["https://www.scrumpoker-online.org/*"],
-        "js": ["revealer.js"]
+        "js": ["revealer.js"],
+        "run_at": "document_start"
       }
     ]
   }
